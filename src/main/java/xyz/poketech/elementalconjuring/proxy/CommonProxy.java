@@ -1,6 +1,7 @@
 package xyz.poketech.elementalconjuring.proxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -9,11 +10,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.entities.EntityFiveLayeredCircle;
 import xyz.poketech.elementalconjuring.entities.EntityMagicCircle;
 import xyz.poketech.elementalconjuring.items.ItemFireSword;
+import xyz.poketech.elementalconjuring.items.ItemWaterSword;
 
 /**
  * Created by Poke on 2017-11-22.
@@ -34,13 +38,7 @@ public class CommonProxy
         EntityRegistry.registerModEntity(
                 new ResourceLocation(ElementalConjuring.MODID,"rune"),
                 EntityMagicCircle.class,
-                "Rune",0, ElementalConjuring.instance,80,1,false
-        );
-
-        EntityRegistry.registerModEntity(
-                new ResourceLocation(ElementalConjuring.MODID,"eye"),
-                EntityMagicCircle.class,
-                "Eye",1, ElementalConjuring.instance,80,1,false
+                "Rune",0, ElementalConjuring.instance,80,1,true
         );
 
         EntityRegistry.registerModEntity(
@@ -64,6 +62,20 @@ public class CommonProxy
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().register(new ItemFireSword(Item.ToolMaterial.DIAMOND)); //TODO: set material in constructor directly
+        event.getRegistry().register(new ItemWaterSword(Item.ToolMaterial.DIAMOND)); //TODO: set material in constructor directly
+    }
+
+    @SubscribeEvent
+    public static void registerEntities(RegistryEvent.Register<EntityEntry> event)
+    {
+        int ID = 0;
+        EntityEntry magicCircleEntry = EntityEntryBuilder.create()
+            .entity(EntityMagicCircle.class)
+            .id(new ResourceLocation(ElementalConjuring.MODID,"rune"), ID++)
+            .name("rune")
+            .tracker(64, 20, false)
+            .build();
+        event.getRegistry().register(magicCircleEntry);
     }
 
 }

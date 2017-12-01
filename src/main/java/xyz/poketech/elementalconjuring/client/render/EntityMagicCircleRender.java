@@ -12,20 +12,23 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import scala.xml.Elem;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.ModItems;
+import xyz.poketech.elementalconjuring.entities.EntityMagicCircle;
 
 import javax.annotation.Nullable;
 
 /**
  * Created by Poke on 2017-11-22.
  */
-public class EntityMagicCircleRender extends Render
+public class EntityMagicCircleRender extends Render<EntityMagicCircle>
 {
     private static final ResourceLocation ARRAY_TEXTURE = new ResourceLocation(ElementalConjuring.MODID, "textures/circles/circle1.png");
     float rotationspeed = 0.5f;
@@ -36,8 +39,15 @@ public class EntityMagicCircleRender extends Render
         super(renderManager);
     }
 
+    @Nullable
     @Override
-    public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+    protected ResourceLocation getEntityTexture(EntityMagicCircle entity)
+    {
+        return null;
+    }
+
+    @Override
+    public void doRender(EntityMagicCircle entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         if(entity.ticksExisted <= SPAWN_ANIMATION_TIME)
         {
@@ -49,7 +59,7 @@ public class EntityMagicCircleRender extends Render
         }
     }
 
-    public void playSpawnAnimation(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void playSpawnAnimation(EntityMagicCircle entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
 
@@ -86,8 +96,28 @@ public class EntityMagicCircleRender extends Render
         GlStateManager.popMatrix();
     }
 
-    public void renderSpinning(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void renderSpinning(EntityMagicCircle entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
+        Item item;
+        int[] color;
+
+        switch (entity.getColor())
+        {
+            case 1:
+                item = ModItems.itemFireSword;
+                color = new int[]{255,0,0};
+                break;
+            case 2:
+                item = ModItems.itemWaterSword;
+                color = new int[]{0,0,255};
+                break;
+            default:
+                item = Items.APPLE;
+                color = new int[]{0,0,0};
+                break;
+        }
+
+
         GlStateManager.pushMatrix();
 
         bindTexture(ARRAY_TEXTURE);
@@ -113,11 +143,8 @@ public class EntityMagicCircleRender extends Render
         vertexbuffer.pos(-1, 0.05, 1).tex(1, 1).endVertex();
         vertexbuffer.pos(1, 0.05, 1).tex(0, 1).endVertex();
 
-        vertexbuffer.color(255,255,255,0);
-
+        GlStateManager.color(color[0],color[1], color[2], 1);
         tessellator.draw();
-
-
 
         vertexbuffer.setTranslation(0,0,0);
         GlStateManager.enableCull();
@@ -137,17 +164,11 @@ public class EntityMagicCircleRender extends Render
         GlStateManager.rotate(rot,0,1,0);
         GlStateManager.rotate(135,0,0,1);
 
-        Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(ModItems.itemFireSword), ItemCameraTransforms.TransformType.FIXED);
+        Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(item), ItemCameraTransforms.TransformType.FIXED);
 
         GlStateManager.translate(-x,-y - pos,-z);
 
         GlStateManager.popMatrix();
     }
 
-    @Nullable
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
-        return null;
-    }
 }

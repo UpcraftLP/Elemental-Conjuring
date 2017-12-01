@@ -2,7 +2,10 @@ package xyz.poketech.elementalconjuring.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 /**
@@ -10,33 +13,51 @@ import net.minecraft.world.World;
  */
 public class EntityMagicCircle extends Entity
 {
-    public EntityMagicCircle(World worldIn)
+    private static final DataParameter<Integer> CIRCLE_COLOR = EntityDataManager.<Integer>createKey(EntityMagicCircle.class, DataSerializers.VARINT);
+
+    public EntityMagicCircle(World world)
     {
-        super(worldIn);
+        super(world);
+        this.setColor(Integer.valueOf(1));
+    }
+
+    public EntityMagicCircle(World world, int color)
+    {
+        super(world);
+        this.setColor(Integer.valueOf(color));
     }
 
     @Override
     protected void entityInit()
     {
+        this.dataManager.register(CIRCLE_COLOR, Integer.valueOf(1));
     }
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound compound)
     {
-
+        this.setColor(compound.getInteger("color"));
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound)
     {
+        compound.setInteger("color", this.getColor());
+    }
 
+    public void setColor(int color)
+    {
+        this.dataManager.set(CIRCLE_COLOR, Integer.valueOf(color));
+    }
+
+    public int getColor()
+    {
+        return this.dataManager.get(CIRCLE_COLOR).intValue();
     }
 
     @Override
-    public void onUpdate()
+    public AxisAlignedBB getRenderBoundingBox()
     {
-        super.onUpdate();
-        if(world.getWorldTime() % 20 == 0)
-            this.world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, this.posX + world.rand.nextFloat() * 2 - 1, this.posY, this.posZ + world.rand.nextFloat() * 2 - 1, 0.0D, 0.05D, 0.0D);
+        return super.getRenderBoundingBox();
     }
 }

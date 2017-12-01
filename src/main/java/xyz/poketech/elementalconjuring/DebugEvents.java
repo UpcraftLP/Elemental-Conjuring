@@ -23,13 +23,13 @@ public class DebugEvents
             Entity entity = null;
             if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() ==  Items.STICK)
             {
-                entity = new EntityFiveLayeredCircle(e.getWorld());
+                entity = new EntityMagicCircle(e.getWorld(), 2);
                 entity.setPosition(e.getHitVec().x,e.getHitVec().y,e.getHitVec().z);
                 e.getWorld().spawnEntity(entity);
             }
             else if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() ==  Items.BONE)
             {
-                entity = new EntityMagicCircle(e.getWorld());
+                entity = new EntityMagicCircle(e.getWorld(), 1);
                 entity.setPosition(e.getHitVec().x,e.getHitVec().y,e.getHitVec().z);
                 e.getWorld().spawnEntity(entity);
             }
