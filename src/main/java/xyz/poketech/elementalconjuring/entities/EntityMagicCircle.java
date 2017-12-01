@@ -8,9 +8,9 @@ import net.minecraft.world.World;
 /**
  * Created by Poke on 2017-11-22.
  */
-public class EntityRune extends Entity
+public class EntityMagicCircle extends Entity
 {
-    public EntityRune(World worldIn)
+    public EntityMagicCircle(World worldIn)
     {
         super(worldIn);
     }

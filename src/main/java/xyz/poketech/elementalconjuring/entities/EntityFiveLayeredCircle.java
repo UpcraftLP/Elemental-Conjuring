@@ -3,7 +3,7 @@ package xyz.poketech.elementalconjuring.entities;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.poketech.elementalconjuring.Sounds;
+import xyz.poketech.elementalconjuring.ModSounds;
 
 /**
  * Created by Poke on 2017-11-23.
@@ -56,7 +56,7 @@ public class EntityFiveLayeredCircle extends Entity
 //        else
         if(this.ticksExisted <= activationTime && this.ticksExisted % animationTime == 0)
         {
-            playSound(Sounds.circle_spawn,1.0f,1.0F);
+            playSound(ModSounds.circle_spawn,1.0f,1.0F);
         }
 
 

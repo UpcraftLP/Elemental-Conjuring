@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 
 @Mod.EventBusSubscriber(modid = ElementalConjuring.MODID)
-public class Sounds
+public class ModSounds
 {
     public static SoundEvent circle_spawn = null;
 

@@ -18,19 +18,20 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import scala.xml.Elem;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
+import xyz.poketech.elementalconjuring.ModItems;
 
 import javax.annotation.Nullable;
 
 /**
  * Created by Poke on 2017-11-22.
  */
-public class EntityRuneRender extends Render
+public class EntityMagicCircleRender extends Render
 {
-    private static final ResourceLocation ARRAY_TEXTURE = new ResourceLocation(ElementalConjuring.MODID, "textures/circles/earth.png");
+    private static final ResourceLocation ARRAY_TEXTURE = new ResourceLocation(ElementalConjuring.MODID, "textures/circles/circle1.png");
     float rotationspeed = 0.5f;
     final double SPAWN_ANIMATION_TIME = 20D;
 
-    public EntityRuneRender(RenderManager renderManager)
+    public EntityMagicCircleRender(RenderManager renderManager)
     {
         super(renderManager);
     }
@@ -112,6 +113,8 @@ public class EntityRuneRender extends Render
         vertexbuffer.pos(-1, 0.05, 1).tex(1, 1).endVertex();
         vertexbuffer.pos(1, 0.05, 1).tex(0, 1).endVertex();
 
+        vertexbuffer.color(255,255,255,0);
+
         tessellator.draw();
 
 
@@ -134,7 +137,7 @@ public class EntityRuneRender extends Render
         GlStateManager.rotate(rot,0,1,0);
         GlStateManager.rotate(135,0,0,1);
 
-        Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(Items.DIAMOND_SWORD), ItemCameraTransforms.TransformType.FIXED);
+        Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(ModItems.itemFireSword), ItemCameraTransforms.TransformType.FIXED);
 
         GlStateManager.translate(-x,-y - pos,-z);
 

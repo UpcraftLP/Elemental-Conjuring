@@ -2,7 +2,6 @@ package xyz.poketech.elementalconjuring.proxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +12,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.entities.EntityFiveLayeredCircle;
-import xyz.poketech.elementalconjuring.entities.EntityRune;
+import xyz.poketech.elementalconjuring.entities.EntityMagicCircle;
+import xyz.poketech.elementalconjuring.items.ItemFireSword;
 
 /**
  * Created by Poke on 2017-11-22.
@@ -33,13 +33,13 @@ public class CommonProxy
     {
         EntityRegistry.registerModEntity(
                 new ResourceLocation(ElementalConjuring.MODID,"rune"),
-                EntityRune.class,
+                EntityMagicCircle.class,
                 "Rune",0, ElementalConjuring.instance,80,1,false
         );
 
         EntityRegistry.registerModEntity(
                 new ResourceLocation(ElementalConjuring.MODID,"eye"),
-                EntityRune.class,
+                EntityMagicCircle.class,
                 "Eye",1, ElementalConjuring.instance,80,1,false
         );
 
@@ -63,6 +63,7 @@ public class CommonProxy
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
+        event.getRegistry().register(new ItemFireSword(Item.ToolMaterial.DIAMOND)); //TODO: set material in constructor directly
     }
 
 }
