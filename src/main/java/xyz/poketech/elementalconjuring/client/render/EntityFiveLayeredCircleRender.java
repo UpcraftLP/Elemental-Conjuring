@@ -17,9 +17,8 @@ import javax.annotation.Nullable;
 
 /**
  * Created by Poke on 2017-11-22.
- *
+ * <p>
  * To anyone reading this, if you're going to yell at me because of how ugly that is, just know that I do not care.
- *
  */
 public class EntityFiveLayeredCircleRender extends Render
 {
@@ -44,7 +43,7 @@ public class EntityFiveLayeredCircleRender extends Render
         //If in first stage, only spawn the first layer
         if(age < timeOffset)
         {
-            spawnLayer(0,entity,x,y,z,entityYaw,partialTicks);
+            spawnLayer(0, entity, x, y, z, entityYaw, partialTicks);
             return;
         }
 
@@ -52,7 +51,7 @@ public class EntityFiveLayeredCircleRender extends Render
         //Render them spinning
         if(age > EntityFiveLayeredCircle.activationTime)
         {
-            renderRotating(5,entity,x,y,z,entityYaw,partialTicks);
+            renderRotating(5, entity, x, y, z, entityYaw, partialTicks);
             return;
         }
 
@@ -61,8 +60,8 @@ public class EntityFiveLayeredCircleRender extends Render
         {
             if(age <= timeOffset * i)
             {
-                spawnLayer(i - 1,entity,x,y,z,entityYaw,partialTicks);
-                renderRotating(i - 1,entity,x,y,z,entityYaw,partialTicks);
+                spawnLayer(i - 1, entity, x, y, z, entityYaw, partialTicks);
+                renderRotating(i - 1, entity, x, y, z, entityYaw, partialTicks);
                 break;
             }
         }
@@ -89,23 +88,23 @@ public class EntityFiveLayeredCircleRender extends Render
             BufferBuilder vertexbuffer = tessellator.getBuffer();
 
             float rot = rotationspeed * (partialTicks + entity.ticksExisted);
-            rot = (i % 2 == 0 ? rot * - 1: rot);
+            rot = (i % 2 == 0 ? rot * -1 : rot);
 
 
-            GlStateManager.translate(x ,y + i ,z);
-            GlStateManager.rotate(rot,0,1,0);
-            GlStateManager.translate(-x,-y,-z);
+            GlStateManager.translate(x, y + i, z);
+            GlStateManager.rotate(rot, 0, 1, 0);
+            GlStateManager.translate(-x, -y, -z);
 
-            vertexbuffer.setTranslation(x,y,z);
+            vertexbuffer.setTranslation(x, y, z);
             vertexbuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
-            vertexbuffer.pos(offset + i, 0.05, -offset - i ).tex(0, 0).endVertex();
-            vertexbuffer.pos(-offset - i , 0.05, -offset - i ).tex(1, 0).endVertex();
-            vertexbuffer.pos(-offset - i , 0.05, offset + i ).tex(1, 1).endVertex();
-            vertexbuffer.pos(offset + i , 0.05, offset+ i ).tex(0, 1).endVertex();
+            vertexbuffer.pos(offset + i, 0.05, -offset - i).tex(0, 0).endVertex();
+            vertexbuffer.pos(-offset - i, 0.05, -offset - i).tex(1, 0).endVertex();
+            vertexbuffer.pos(-offset - i, 0.05, offset + i).tex(1, 1).endVertex();
+            vertexbuffer.pos(offset + i, 0.05, offset + i).tex(0, 1).endVertex();
 
             tessellator.draw();
-            vertexbuffer.setTranslation(0,0,0);
+            vertexbuffer.setTranslation(0, 0, 0);
 
             GlStateManager.popMatrix();
         }
@@ -125,7 +124,7 @@ public class EntityFiveLayeredCircleRender extends Render
         BufferBuilder vertexbuffer = tessellator.getBuffer();
 
         float rot = rotationspeed * (partialTicks + entity.ticksExisted);
-        rot = (i % 2 == 0 ? rot * - 1: rot);    //So every layer spin in opposite direction
+        rot = (i % 2 == 0 ? rot * -1 : rot);    //So every layer spin in opposite direction
 
         GlStateManager.disableBlend();
         GlStateManager.disableCull();
@@ -134,32 +133,36 @@ public class EntityFiveLayeredCircleRender extends Render
         //Ratio of where we are in the stage, 0 being the start and 1 the end
         double ageRatio;
         if(i == 0)
+        {
             ageRatio = (((entity.ticksExisted + partialTicks) / SPAWN_ANIMATION_TIME));
+        }
         else
+        {
             ageRatio = ((entity.ticksExisted + partialTicks) - (timeOffset * i)) / SPAWN_ANIMATION_TIME;
+        }
 
         bindTexture(ARRAY_TEXTURE);
 
-        GlStateManager.translate(x ,y + i,z);
+        GlStateManager.translate(x, y + i, z);
 
-        GlStateManager.rotate(rot,0,1,0);
+        GlStateManager.rotate(rot, 0, 1, 0);
 
         //Scales according to the ageRatio, so the later we are the closer to 1 we get.
-        GlStateManager.scale(ageRatio,1, ageRatio);
+        GlStateManager.scale(ageRatio, 1, ageRatio);
 
-        GlStateManager.translate(-x,-y,-z);
+        GlStateManager.translate(-x, -y, -z);
 
-        vertexbuffer.setTranslation(x,y,z);
+        vertexbuffer.setTranslation(x, y, z);
         vertexbuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
-        vertexbuffer.pos(offset + i, 0.05, -offset - i ).tex(0, 0).endVertex();
-        vertexbuffer.pos(-offset - i , 0.05, -offset - i ).tex(1, 0).endVertex();
-        vertexbuffer.pos(-offset - i , 0.05, offset + i ).tex(1, 1).endVertex();
-        vertexbuffer.pos(offset + i , 0.05, offset+ i ).tex(0, 1).endVertex();
+        vertexbuffer.pos(offset + i, 0.05, -offset - i).tex(0, 0).endVertex();
+        vertexbuffer.pos(-offset - i, 0.05, -offset - i).tex(1, 0).endVertex();
+        vertexbuffer.pos(-offset - i, 0.05, offset + i).tex(1, 1).endVertex();
+        vertexbuffer.pos(offset + i, 0.05, offset + i).tex(0, 1).endVertex();
 
         tessellator.draw();
 
-        vertexbuffer.setTranslation(0,0,0);
+        vertexbuffer.setTranslation(0, 0, 0);
         GlStateManager.enableCull();
 
         GlStateManager.popMatrix();
@@ -171,5 +174,5 @@ public class EntityFiveLayeredCircleRender extends Render
     {
         return null;
     }
-    
+
 }

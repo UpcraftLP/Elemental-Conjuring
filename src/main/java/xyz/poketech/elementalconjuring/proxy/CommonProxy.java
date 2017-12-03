@@ -36,15 +36,15 @@ public class CommonProxy
     public void init(FMLInitializationEvent e)
     {
         EntityRegistry.registerModEntity(
-                new ResourceLocation(ElementalConjuring.MODID,"rune"),
+                new ResourceLocation(ElementalConjuring.MODID, "rune"),
                 EntityMagicCircle.class,
-                "Rune",0, ElementalConjuring.instance,80,1,true
+                "Rune", 0, ElementalConjuring.instance, 80, 1, true
         );
 
         EntityRegistry.registerModEntity(
-                new ResourceLocation(ElementalConjuring.MODID,"five_layer"),
+                new ResourceLocation(ElementalConjuring.MODID, "five_layer"),
                 EntityFiveLayeredCircle.class,
-                "FiveLayerMagicCircle",2, ElementalConjuring.instance,80,1,false
+                "FiveLayerMagicCircle", 2, ElementalConjuring.instance, 80, 1, false
         );
     }
 
@@ -70,11 +70,11 @@ public class CommonProxy
     {
         int ID = 0;
         EntityEntry magicCircleEntry = EntityEntryBuilder.create()
-            .entity(EntityMagicCircle.class)
-            .id(new ResourceLocation(ElementalConjuring.MODID,"rune"), ID++)
-            .name("rune")
-            .tracker(64, 20, false)
-            .build();
+                .entity(EntityMagicCircle.class)
+                .id(new ResourceLocation(ElementalConjuring.MODID, "rune"), ID++)
+                .name("rune")
+                .tracker(64, 20, false)
+                .build();
         event.getRegistry().register(magicCircleEntry);
     }
 

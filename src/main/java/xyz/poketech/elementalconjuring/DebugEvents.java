@@ -21,16 +21,16 @@ public class DebugEvents
         if(!e.getWorld().isRemote)
         {
             Entity entity = null;
-            if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() ==  Items.STICK)
+            if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.STICK)
             {
                 entity = new EntityMagicCircle(e.getWorld(), 2);
-                entity.setPosition(e.getHitVec().x,e.getHitVec().y,e.getHitVec().z);
+                entity.setPosition(e.getHitVec().x, e.getHitVec().y, e.getHitVec().z);
                 e.getWorld().spawnEntity(entity);
             }
-            else if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() ==  Items.BONE)
+            else if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.BONE)
             {
                 entity = new EntityMagicCircle(e.getWorld(), 1);
-                entity.setPosition(e.getHitVec().x,e.getHitVec().y,e.getHitVec().z);
+                entity.setPosition(e.getHitVec().x, e.getHitVec().y, e.getHitVec().z);
                 e.getWorld().spawnEntity(entity);
             }
         }

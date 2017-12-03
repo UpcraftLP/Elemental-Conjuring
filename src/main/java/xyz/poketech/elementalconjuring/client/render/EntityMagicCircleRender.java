@@ -51,11 +51,11 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
     {
         if(entity.ticksExisted <= SPAWN_ANIMATION_TIME)
         {
-            playSpawnAnimation(entity,x,y,z,entityYaw,partialTicks);
+            playSpawnAnimation(entity, x, y, z, entityYaw, partialTicks);
         }
         else
         {
-            renderSpinning(entity,x,y,z,entityYaw,partialTicks);
+            renderSpinning(entity, x, y, z, entityYaw, partialTicks);
         }
     }
 
@@ -74,13 +74,13 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
 
-        GlStateManager.translate(x ,y,z);
-        GlStateManager.rotate(rot,0,1,0);
-        GlStateManager.scale(ageRatio,1, ageRatio);
+        GlStateManager.translate(x, y, z);
+        GlStateManager.rotate(rot, 0, 1, 0);
+        GlStateManager.scale(ageRatio, 1, ageRatio);
 
-        GlStateManager.translate(-x,-y,-z);
+        GlStateManager.translate(-x, -y, -z);
 
-        vertexbuffer.setTranslation(x,y,z);
+        vertexbuffer.setTranslation(x, y, z);
         vertexbuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
         vertexbuffer.pos(1, 0.05, -1).tex(0, 0).endVertex();
@@ -90,7 +90,7 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
 
         tessellator.draw();
 
-        vertexbuffer.setTranslation(0,0,0);
+        vertexbuffer.setTranslation(0, 0, 0);
         GlStateManager.enableCull();
 
         GlStateManager.popMatrix();
@@ -101,19 +101,19 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
         Item item;
         int[] color;
 
-        switch (entity.getColor())
+        switch(entity.getColor())
         {
             case 1:
                 item = ModItems.itemFireSword;
-                color = new int[]{255,0,0};
+                color = new int[]{255, 0, 0};
                 break;
             case 2:
                 item = ModItems.itemWaterSword;
-                color = new int[]{0,0,255};
+                color = new int[]{0, 0, 255};
                 break;
             default:
                 item = Items.APPLE;
-                color = new int[]{0,0,0};
+                color = new int[]{0, 0, 0};
                 break;
         }
 
@@ -130,12 +130,12 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
 
-        GlStateManager.translate(x ,y,z);
+        GlStateManager.translate(x, y, z);
 
-        GlStateManager.rotate(rot,0,1,0);
-        GlStateManager.translate(-x,-y,-z);
+        GlStateManager.rotate(rot, 0, 1, 0);
+        GlStateManager.translate(-x, -y, -z);
 
-        vertexbuffer.setTranslation(x,y,z);
+        vertexbuffer.setTranslation(x, y, z);
         vertexbuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
         vertexbuffer.pos(1, 0.05, -1).tex(0, 0).endVertex();
@@ -143,10 +143,10 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
         vertexbuffer.pos(-1, 0.05, 1).tex(1, 1).endVertex();
         vertexbuffer.pos(1, 0.05, 1).tex(0, 1).endVertex();
 
-        GlStateManager.color(color[0],color[1], color[2], 1);
+        GlStateManager.color(color[0], color[1], color[2], 1);
         tessellator.draw();
 
-        vertexbuffer.setTranslation(0,0,0);
+        vertexbuffer.setTranslation(0, 0, 0);
         GlStateManager.enableCull();
 
         GlStateManager.popMatrix();
@@ -154,19 +154,19 @@ public class EntityMagicCircleRender extends Render<EntityMagicCircle>
         GlStateManager.pushMatrix();
 
         double pos = 1;
-        if(entity.ticksExisted <= (SPAWN_ANIMATION_TIME*2))
+        if(entity.ticksExisted <= (SPAWN_ANIMATION_TIME * 2))
         {
             pos = SPAWN_ANIMATION_TIME / (partialTicks + entity.ticksExisted - SPAWN_ANIMATION_TIME);
         }
 
-        GlStateManager.translate(x ,y + pos,z);
+        GlStateManager.translate(x, y + pos, z);
 
-        GlStateManager.rotate(rot,0,1,0);
-        GlStateManager.rotate(135,0,0,1);
+        GlStateManager.rotate(rot, 0, 1, 0);
+        GlStateManager.rotate(135, 0, 0, 1);
 
         Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(item), ItemCameraTransforms.TransformType.FIXED);
 
-        GlStateManager.translate(-x,-y - pos,-z);
+        GlStateManager.translate(-x, -y - pos, -z);
 
         GlStateManager.popMatrix();
     }

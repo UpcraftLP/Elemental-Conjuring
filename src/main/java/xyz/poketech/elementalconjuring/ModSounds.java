@@ -16,11 +16,13 @@ public class ModSounds
     public static SoundEvent circle_spawn = null;
 
     @SubscribeEvent
-    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+    public static void registerSounds(RegistryEvent.Register<SoundEvent> event)
+    {
         circle_spawn = registerSound(event, "circle_spawn");
     }
 
-    private static SoundEvent registerSound(RegistryEvent.Register<SoundEvent> event, @SuppressWarnings("SameParameterValue") String soundName) {
+    private static SoundEvent registerSound(RegistryEvent.Register<SoundEvent> event, @SuppressWarnings("SameParameterValue") String soundName)
+    {
         SoundEvent sound = new SoundEvent(new ResourceLocation(ElementalConjuring.MODID, soundName)).setRegistryName(soundName);
         event.getRegistry().register(sound);
         return sound;
