@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 /**
  * Created by Poke on 2017-11-22.
- * <p>
+ *
  * To anyone reading this, if you're going to yell at me because of how ugly that is, just know that I do not care.
  */
 public class EntityFiveLayeredCircleRender extends Render
