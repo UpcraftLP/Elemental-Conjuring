@@ -10,9 +10,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import xyz.poketech.elementalconjuring.ModItems;
 import xyz.poketech.elementalconjuring.client.render.EntityFiveLayeredCircleRender;
-import xyz.poketech.elementalconjuring.client.render.EntityMagicCircleRender;
+import xyz.poketech.elementalconjuring.client.render.EntitySummonedItemRender;
 import xyz.poketech.elementalconjuring.entities.EntityFiveLayeredCircle;
-import xyz.poketech.elementalconjuring.entities.EntityMagicCircle;
+import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 
 /**
  * Created by Poke on 2017-11-22.
@@ -25,7 +25,7 @@ public class ClientProxy extends CommonProxy
     public void preInit(FMLPreInitializationEvent e)
     {
         super.preInit(e);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMagicCircle.class, EntityMagicCircleRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySummonedItem.class, EntitySummonedItemRender::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFiveLayeredCircle.class, EntityFiveLayeredCircleRender::new);
     }
 

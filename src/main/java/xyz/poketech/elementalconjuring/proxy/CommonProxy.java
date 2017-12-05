@@ -1,7 +1,6 @@
 package xyz.poketech.elementalconjuring.proxy;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,7 +14,7 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.entities.EntityFiveLayeredCircle;
-import xyz.poketech.elementalconjuring.entities.EntityMagicCircle;
+import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 import xyz.poketech.elementalconjuring.items.ItemFireSword;
 import xyz.poketech.elementalconjuring.items.ItemWaterSword;
 
@@ -37,7 +36,7 @@ public class CommonProxy
     {
         EntityRegistry.registerModEntity(
                 new ResourceLocation(ElementalConjuring.MODID, "rune"),
-                EntityMagicCircle.class,
+                EntitySummonedItem.class,
                 "Rune", 0, ElementalConjuring.instance, 80, 1, true
         );
 
@@ -70,7 +69,7 @@ public class CommonProxy
     {
         int ID = 0;
         EntityEntry magicCircleEntry = EntityEntryBuilder.create()
-                .entity(EntityMagicCircle.class)
+                .entity(EntitySummonedItem.class)
                 .id(new ResourceLocation(ElementalConjuring.MODID, "rune"), ID++)
                 .name("rune")
                 .tracker(64, 20, false)
