@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -37,13 +38,15 @@ public class EntitySummonedItem extends Entity
     @Override
     protected void readEntityFromNBT(NBTTagCompound compound)
     {
-        this.setSummonedItem(new ItemStack(compound));
+        this.setSummonedItem(new ItemStack(compound.getCompoundTag("summoned_item")));
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound compound)
     {
-        this.getSummonedItem().writeToNBT(compound);
+        NBTTagCompound itemTag = new NBTTagCompound();
+        this.getSummonedItem().writeToNBT(itemTag);
+        compound.setTag("summoned_item", itemTag);
     }
 
     public void setSummonedItem(ItemStack itemStack)
