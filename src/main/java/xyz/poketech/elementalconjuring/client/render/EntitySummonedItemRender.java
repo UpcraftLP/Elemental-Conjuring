@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
+import xyz.poketech.elementalconjuring.etc.EnumElement;
 
 import javax.annotation.Nullable;
 
@@ -41,17 +42,22 @@ public class EntitySummonedItemRender extends Render<EntitySummonedItem>
     @Override
     public void doRender(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
+        int r = EnumElement.values()[entity.getElement()].getR();
+        int b = EnumElement.values()[entity.getElement()].getB();
+        int g = EnumElement.values()[entity.getElement()].getG();
+        int a = EnumElement.values()[entity.getElement()].getA();
+
         if(entity.ticksExisted <= SPAWN_ANIMATION_TIME)
         {
-            playSpawnAnimation(entity, x, y, z, entityYaw, partialTicks);
+            playSpawnAnimation(entity, x, y, z, entityYaw, partialTicks,r,b,g,a);
         }
         else
         {
-            renderSpinning(entity, x, y, z, entityYaw, partialTicks);
+            renderSpinning(entity, x, y, z, entityYaw, partialTicks,r,b,g,a);
         }
     }
 
-    public void playSpawnAnimation(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void playSpawnAnimation(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks, int r,int b, int g, int a)
     {
         GlStateManager.pushMatrix();
 
@@ -80,7 +86,8 @@ public class EntitySummonedItemRender extends Render<EntitySummonedItem>
         vertexbuffer.pos(-1, 0.05, 1).tex(1, 1).endVertex();
         vertexbuffer.pos(1, 0.05, 1).tex(0, 1).endVertex();
 
-        GlStateManager.color(0, 0, 0, 1);
+        GlStateManager.color(r,g,b,a);
+
         tessellator.draw();
 
         vertexbuffer.setTranslation(0, 0, 0);
@@ -89,7 +96,7 @@ public class EntitySummonedItemRender extends Render<EntitySummonedItem>
         GlStateManager.popMatrix();
     }
 
-    public void renderSpinning(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void renderSpinning(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks, int r,int b, int g, int a)
     {
         GlStateManager.pushMatrix();
 
@@ -116,7 +123,7 @@ public class EntitySummonedItemRender extends Render<EntitySummonedItem>
         vertexbuffer.pos(-1, 0.05, 1).tex(1, 1).endVertex();
         vertexbuffer.pos(1, 0.05, 1).tex(0, 1).endVertex();
 
-        GlStateManager.color(0, 0, 0, 1);
+        GlStateManager.color(r,g,b,a);
         tessellator.draw();
 
         vertexbuffer.setTranslation(0, 0, 0);

@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
+import xyz.poketech.elementalconjuring.etc.EnumElement;
 
 /**
  * Created by Poke on 2017-11-23.
@@ -22,13 +23,13 @@ public class DebugEvents
         {
             if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.STICK)
             {
-                Entity entity = new EntitySummonedItem(e.getWorld(), new ItemStack(ModItems.itemFireSword));
+                Entity entity = new EntitySummonedItem(e.getWorld(), EnumElement.FIRE.ordinal(), new ItemStack(ModItems.itemFireSword));
                 entity.setPosition(e.getHitVec().x, e.getHitVec().y, e.getHitVec().z);
                 e.getWorld().spawnEntity(entity);
             }
             else if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.BONE)
             {
-                Entity entity = new EntitySummonedItem(e.getWorld(), new ItemStack(ModItems.itemWaterSword));
+                Entity entity = new EntitySummonedItem(e.getWorld(),  EnumElement.WATER.ordinal(), new ItemStack(ModItems.itemWaterSword));
                 entity.setPosition(e.getHitVec().x, e.getHitVec().y, e.getHitVec().z);
                 e.getWorld().spawnEntity(entity);
             }
