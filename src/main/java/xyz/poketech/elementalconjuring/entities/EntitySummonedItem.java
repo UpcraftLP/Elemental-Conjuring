@@ -61,10 +61,4 @@ public class EntitySummonedItem extends Entity
     {
         return super.getRenderBoundingBox();
     }
-
-    @Override
-    public AxisAlignedBB getEntityBoundingBox()
-    {
-        return super.getEntityBoundingBox();
-    }
 }

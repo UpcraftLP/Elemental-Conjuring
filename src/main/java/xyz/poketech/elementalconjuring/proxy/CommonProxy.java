@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
-import xyz.poketech.elementalconjuring.entities.EntityFiveLayeredCircle;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 import xyz.poketech.elementalconjuring.items.ItemFireSword;
 import xyz.poketech.elementalconjuring.items.ItemWaterSword;
@@ -35,15 +34,9 @@ public class CommonProxy
     public void init(FMLInitializationEvent e)
     {
         EntityRegistry.registerModEntity(
-                new ResourceLocation(ElementalConjuring.MODID, "rune"),
+                new ResourceLocation(ElementalConjuring.MODID, "summoned_item"),
                 EntitySummonedItem.class,
                 "Rune", 0, ElementalConjuring.instance, 80, 1, true
-        );
-
-        EntityRegistry.registerModEntity(
-                new ResourceLocation(ElementalConjuring.MODID, "five_layer"),
-                EntityFiveLayeredCircle.class,
-                "FiveLayerMagicCircle", 2, ElementalConjuring.instance, 80, 1, false
         );
     }
 
