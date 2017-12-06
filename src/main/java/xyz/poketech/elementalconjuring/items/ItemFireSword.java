@@ -1,6 +1,8 @@
 package xyz.poketech.elementalconjuring.items;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -17,6 +19,13 @@ public class ItemFireSword extends ItemSword
         super(material);
         setRegistryName("fire_sword");
         setUnlocalizedName(ElementalConjuring.MODID + ".fire_sword");
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+    {
+        //target.setFire(10);
+        return super.hitEntity(stack, target, attacker);
     }
 
     @SideOnly(Side.CLIENT)

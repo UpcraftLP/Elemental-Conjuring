@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import xyz.poketech.elementalconjuring.ModItems;
-import xyz.poketech.elementalconjuring.client.render.EntitySummonedItemRender;
+import xyz.poketech.elementalconjuring.client.render.RenderSummonedItem;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 
 /**
@@ -23,7 +23,7 @@ public class ClientProxy extends CommonProxy
     public void preInit(FMLPreInitializationEvent e)
     {
         super.preInit(e);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySummonedItem.class, EntitySummonedItemRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySummonedItem.class, RenderSummonedItem::new);
     }
 
     @Override
