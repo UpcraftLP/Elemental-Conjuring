@@ -105,6 +105,8 @@ sourceSets {
 }
 
 jar {
+    exclude('xyz/poketech/elementalconjuring/debug/**')
+
     manifest.mainAttributes(
             "Implementation-Title": project.name,
             "Implementation-Version": "${project.mod_version}",
