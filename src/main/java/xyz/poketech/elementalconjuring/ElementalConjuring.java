@@ -12,11 +12,20 @@ import xyz.poketech.elementalconjuring.proxy.CommonProxy;
  * Created by Poke on 2017-11-21.
  */
 @Mod.EventBusSubscriber
-@Mod(modid = ElementalConjuring.MODID, version = ElementalConjuring.VERSION)
+@Mod(
+        modid = ElementalConjuring.MODID,
+        version = ElementalConjuring.VERSION,
+        acceptedMinecraftVersions = ElementalConjuring.VERSION_RANGE,
+        dependencies = ElementalConjuring.DEPENDENCIES,
+        certificateFingerprint = ElementalConjuring.FINGERPRINT_KEY
+)
 public class ElementalConjuring
 {
     public static final String MODID = "elemental_conjuring";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "@VERSION@";
+    public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
+    public static final String VERSION_RANGE = "[1.12,1.13)";
+    public static final String DEPENDENCIES = "required-after:forge@[14.13.0.2489,)";
 
     @Mod.Instance
     public static ElementalConjuring instance;

@@ -1,4 +1,4 @@
-package xyz.poketech.elementalconjuring;
+package xyz.poketech.elementalconjuring.debug;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -7,6 +7,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import xyz.poketech.elementalconjuring.ElementalConjuring;
+import xyz.poketech.elementalconjuring.ModItems;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 import xyz.poketech.elementalconjuring.data.ElementType;
 
