@@ -11,11 +11,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
+import xyz.poketech.elementalconjuring.handler.JumpHandler;
 import xyz.poketech.elementalconjuring.items.ItemFireSword;
 import xyz.poketech.elementalconjuring.items.ItemWaterSword;
+import xyz.poketech.elementalconjuring.net.NetworkHandler;
+import xyz.poketech.elementalconjuring.net.packet.PacketJump;
 
 /**
  * Created by Poke on 2017-11-22.
@@ -27,8 +30,7 @@ public class CommonProxy
 
     public void preInit(FMLPreInitializationEvent e)
     {
-
-
+        NetworkHandler.registerMessage(JumpHandler.class, PacketJump.class, Side.SERVER);
     }
 
     public void init(FMLInitializationEvent e)

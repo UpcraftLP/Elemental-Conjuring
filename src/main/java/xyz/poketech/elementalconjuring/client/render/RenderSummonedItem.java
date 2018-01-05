@@ -8,13 +8,12 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
-import xyz.poketech.elementalconjuring.data.ElementType;
 import xyz.poketech.elementalconjuring.util.ColorUtil;
 
 import javax.annotation.Nullable;
@@ -43,6 +42,12 @@ public class RenderSummonedItem extends Render<EntitySummonedItem>
     @Override
     public void doRender(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, z);
+        GlStateManager.rotate(entityYaw, 0, 1, 0);
+        GlStateManager.rotate(entity.rotationPitch, 0, 0, 1);
+        //TODO rotate the way the entity is facing
+
         if(entity.ticksExisted <= SPAWN_ANIMATION_TIME)
         {
             playSpawnAnimation(entity, x, y, z, entityYaw, partialTicks);
@@ -51,6 +56,7 @@ public class RenderSummonedItem extends Render<EntitySummonedItem>
         {
             renderSpinning(entity, x, y, z, entityYaw, partialTicks);
         }
+        GlStateManager.popMatrix();
     }
 
     public void playSpawnAnimation(EntitySummonedItem entity, double x, double y, double z, float entityYaw, float partialTicks)
@@ -68,7 +74,6 @@ public class RenderSummonedItem extends Render<EntitySummonedItem>
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
 
-        GlStateManager.translate(x, y, z);
         GlStateManager.rotate(rot, 0, 1, 0);
         GlStateManager.scale(ageRatio, 1, ageRatio);
 
@@ -106,8 +111,6 @@ public class RenderSummonedItem extends Render<EntitySummonedItem>
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
 
-        GlStateManager.translate(x, y, z);
-
         GlStateManager.rotate(rot, 0, 1, 0);
         GlStateManager.translate(-x, -y, -z);
 
@@ -127,27 +130,30 @@ public class RenderSummonedItem extends Render<EntitySummonedItem>
 
         GlStateManager.popMatrix();
 
-        GlStateManager.pushMatrix();
+        ItemStack item = entity.getSummonedItem();
+        if(!item.isEmpty()) {
+            GlStateManager.pushMatrix();
 
-        double pos = 1;
-        double offset = Math.cos((entity.ticksExisted + partialTicks) / 10) / 4.0;
+            double pos = 1;
+            double offset = Math.cos((entity.ticksExisted + partialTicks) / 10) / 4.0;
 
-        if(entity.ticksExisted <= (SPAWN_ANIMATION_TIME * 2))
-        {
-            pos = -1 + ((entity.ticksExisted + partialTicks - SPAWN_ANIMATION_TIME) / 10); //Don't even ask
-            offset = 0;
+            if(entity.ticksExisted <= (SPAWN_ANIMATION_TIME * 2))
+            {
+                pos = -1 + ((entity.ticksExisted + partialTicks - SPAWN_ANIMATION_TIME) / 10); //Don't even ask
+                offset = 0;
+            }
+            GlStateManager.translate(0, pos + offset, 0);
 
+            GlStateManager.rotate(-rot * 2, 0, 1, 0);
+            int angle = item.getItem().isFull3D() ? 135 : 0;
+            GlStateManager.rotate(angle, 0, 0, 1);
+
+            Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.FIXED);
+
+            GlStateManager.translate(0, -pos - offset, 0);
+
+            GlStateManager.popMatrix();
         }
-        GlStateManager.translate(x, y + pos + offset, z);
-
-        GlStateManager.rotate(-rot * 2, 0, 1, 0);
-        GlStateManager.rotate(135, 0, 0, 1);
-
-        Minecraft.getMinecraft().getRenderItem().renderItem(entity.getSummonedItem(), ItemCameraTransforms.TransformType.FIXED);
-
-        GlStateManager.translate(-x, -y - pos - offset, -z);
-
-        GlStateManager.popMatrix();
     }
 
 }

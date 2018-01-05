@@ -1,14 +1,14 @@
 package xyz.poketech.elementalconjuring.data;
 
-import xyz.poketech.elementalconjuring.util.ColorUtil;
+import java.awt.*;
 
 public enum ElementType
 {
 
-    FIRE(ColorUtil.getRGB(255,0,0)),
-    WATER(ColorUtil.getRGB(0,0,255)),
-    EARTH(ColorUtil.getRGB(139,69,19)),
-    WIND(ColorUtil.getRGB(255,255,255));
+    FIRE(new Color(255,0,0).getRGB()),
+    WATER(new Color(0,0,255).getRGB()),
+    EARTH(new Color(139,69,19).getRGB()),
+    WIND(new Color(255,255,255).getRGB());
 
     private int color;
 

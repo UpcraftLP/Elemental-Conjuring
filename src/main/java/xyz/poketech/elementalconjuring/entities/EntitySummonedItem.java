@@ -21,7 +21,7 @@ public class EntitySummonedItem extends Entity
     private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntitySummonedItem.class, DataSerializers.VARINT);
 
     private int pickupDelay;
-    private int lifeSpan = 1200;
+    public int lifeSpan = 1200;
 
     public EntitySummonedItem(World world)
     {
@@ -49,7 +49,7 @@ public class EntitySummonedItem extends Entity
     }
 
     public void setDefaultPickupDelay() {
-        this.pickupDelay = 30; //20 ticks spawn animation + default item pickup delay
+        this.pickupDelay = 50; //40 ticks spawn animation + default item pickup delay
     }
 
     @Override
@@ -57,8 +57,8 @@ public class EntitySummonedItem extends Entity
         if(!this.world.isRemote && this.pickupDelay == 0) {
             entityIn.addItemStackToInventory(this.getSummonedItem());
             this.setSummonedItem(ItemStack.EMPTY);
+            this.setDead(); //TODO fancy pickup animation?
         }
-        this.setDead(); //TODO fancy pickup animation?
     }
 
     @Override

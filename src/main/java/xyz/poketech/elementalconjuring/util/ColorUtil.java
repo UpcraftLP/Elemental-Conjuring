@@ -32,11 +32,6 @@ public final class ColorUtil {
         return new Vector4f(r / 255F, g / 255F, b / 255F, 1);
     }
 
-    public static int getRGB(@Nullable Color color) {
-        // Note: Constants in java.awt.Color are not @Nonnull-annotated
-        return color == null ? 0 : getRGB(color.getRed(), color.getGreen(), color.getBlue());
-    }
-
     public static int getRGBA(@Nullable Color color) {
         return color == null ? 0 : getRGBA(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
@@ -63,10 +58,6 @@ public final class ColorUtil {
 
     public static int getARGB(float r, float g, float b, float a) {
         return getARGB((int) (a * 255), (int) (r * 255), (int) (g * 255), (int) (b * 255));
-    }
-
-    public static int getRGB(int r, int g, int b) {
-        return (r & 0xFF) << 16 | (g & 0xFF) << 8 | (b & 0xFF);
     }
 
     public static int getARGB(int r, int g, int b, int a) {
