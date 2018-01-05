@@ -1,16 +1,20 @@
 package xyz.poketech.elementalconjuring.debug;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import xyz.poketech.elementalconjuring.ElementalConjuring;
 import xyz.poketech.elementalconjuring.ModItems;
-import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 import xyz.poketech.elementalconjuring.data.ElementType;
+import xyz.poketech.elementalconjuring.entities.EntitySummonedItem;
 
 /**
  * Created by Poke on 2017-11-23.
@@ -19,21 +23,28 @@ import xyz.poketech.elementalconjuring.data.ElementType;
 public class DebugEvents
 {
     @SubscribeEvent
-    public static void rightClick(PlayerInteractEvent.RightClickBlock e)
+    public static void rightClick(PlayerInteractEvent.RightClickBlock event)
     {
-        if(!e.getWorld().isRemote)
+        if(event.getSide() == Side.SERVER)
         {
-            if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.STICK)
+            Item item = event.getItemStack().getItem();
+            ItemStack stack = null;
+            int color = 0;
+            if(item == Items.STICK)
             {
-                Entity entity = new EntitySummonedItem(e.getWorld(), ElementType.FIRE.getColor(), new ItemStack(ModItems.itemFireSword));
-                entity.setPosition(e.getHitVec().x, e.getHitVec().y, e.getHitVec().z);
-                e.getWorld().spawnEntity(entity);
+                stack = new ItemStack(ModItems.itemFireSword);
+                color = ElementType.FIRE.getColor();
             }
-            else if(e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.BONE)
+            else if(item == Items.BONE)
             {
-                Entity entity = new EntitySummonedItem(e.getWorld(),  ElementType.WATER.getColor(), new ItemStack(ModItems.itemWaterSword));
-                entity.setPosition(e.getHitVec().x, e.getHitVec().y, e.getHitVec().z);
-                e.getWorld().spawnEntity(entity);
+                stack = new ItemStack(ModItems.itemWaterSword);
+                color = ElementType.WATER.getColor();
+            }
+
+            if(stack != null) {
+                EntitySummonedItem entity = new EntitySummonedItem(event.getWorld(), color, stack);
+                entity.setPosition(event.getHitVec().x, event.getHitVec().y, event.getHitVec().z);
+                event.getWorld().spawnEntity(entity);
             }
         }
     }
