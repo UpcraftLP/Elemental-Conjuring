@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import xyz.poketech.elementalconjuring.proxy.CommonProxy;
 
@@ -28,9 +29,9 @@ public class ElementalConjuring
     public static final String DEPENDENCIES = "required-after:forge@[14.13.0.2489,)";
 
     @Mod.Instance
-    public static ElementalConjuring instance;
+    public static ElementalConjuring INSTANCE;
 
-    public static Logger logger;
+    public static final Logger logger = LogManager.getLogger(MODID);
 
     @SidedProxy(clientSide = "xyz.poketech.elementalconjuring.proxy.ClientProxy", serverSide = "xyz.poketech.elementalconjuring.proxy.ServerProxy")
     public static CommonProxy proxy;
@@ -38,7 +39,6 @@ public class ElementalConjuring
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        logger = event.getModLog();
         proxy.preInit(event);
     }
 

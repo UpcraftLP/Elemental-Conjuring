@@ -1,13 +1,14 @@
 package xyz.poketech.elementalconjuring.util;
-import java.awt.Color;
+
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.vecmath.Vector3f;
 import javax.vecmath.Vector4f;
-
-
-import net.minecraft.client.renderer.GlStateManager;
+import java.awt.*;
 
 public final class ColorUtil {
 
@@ -81,6 +82,7 @@ public final class ColorUtil {
      *
      * @author Buildcraft team
      */
+    @SideOnly(Side.CLIENT)
     public static void setGLColorFromInt(int color) {
         float red = (color >> 16 & 255) / 255.0F;
         float green = (color >> 8 & 255) / 255.0F;
