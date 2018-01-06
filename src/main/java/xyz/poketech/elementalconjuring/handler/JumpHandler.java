@@ -51,9 +51,9 @@ public class JumpHandler implements IMessageHandler<PacketJump, IMessage> {
 
                         EntitySummonedItem entity = new EntitySummonedItem(player.world, COLOR);
                         entity.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch); //FIXME orient circle properly!
-                        entity.lifeSpan = 150;
+                        entity.lifeSpan = 60;
                         entity.setNoPickup(true);
-                        entity.ticksExisted = EntitySummonedItem.SPAWN_ANIMATION_TIME * 3;
+                        entity.ticksExisted = EntitySummonedItem.SPAWN_ANIMATION_TIME;
                         player.world.spawnEntity(entity);
 
                         float f1 = player.rotationYaw * 0.017453292F;
