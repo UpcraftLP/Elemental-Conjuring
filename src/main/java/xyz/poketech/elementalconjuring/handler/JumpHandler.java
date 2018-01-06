@@ -25,7 +25,7 @@ public class JumpHandler implements IMessageHandler<PacketJump, IMessage> {
     private static final Map<UUID, Long> JUMP_PLAYERS = Maps.newHashMap();
     private static final Map<UUID, Boolean> SIDES = Maps.newHashMap();
     public static final long JUMP_DELAY = 300L;
-    public static final int COLOR = new Color(0x29535D).getRGB();
+    public static final int COLOR = new Color(0xA8E0FF).getRGB();
 
     @SuppressWarnings("unused")
     public JumpHandler() {
