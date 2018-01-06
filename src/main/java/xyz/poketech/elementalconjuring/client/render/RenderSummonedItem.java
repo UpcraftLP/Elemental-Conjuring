@@ -23,9 +23,9 @@ import javax.annotation.Nullable;
  */
 public class RenderSummonedItem extends Render<EntitySummonedItem>
 {
-    private static final ResourceLocation ARRAY_TEXTURE = new ResourceLocation(ElementalConjuring.MODID, "textures/circles/circle1.png");
     float rotationspeed = 0.5f;
     final double SPAWN_ANIMATION_TIME = 20D;
+    private static final ResourceLocation ARRAY_TEXTURE = new ResourceLocation(ElementalConjuring.MODID, "textures/circles/circle.png");
 
     public RenderSummonedItem(RenderManager renderManager)
     {
